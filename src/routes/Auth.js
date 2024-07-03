@@ -1,3 +1,10 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTwitter,
+  faGoogle,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
+
 import { useState } from "react";
 import { authService } from "fbase";
 import {
@@ -60,8 +67,14 @@ const Auth = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className={"authContainer"}>
+      <FontAwesomeIcon
+        icon={faTwitter}
+        color={"#04AAFF"}
+        size="3x"
+        style={{ marginBottom: 30 }}
+      />
+      <form onSubmit={onSubmit} className={"container"}>
         <input
           name="email"
           type="email"
@@ -69,6 +82,7 @@ const Auth = () => {
           value={email}
           onChange={onChange}
           required
+          className={"authInput"}
         />
         <input
           name="password"
@@ -77,19 +91,26 @@ const Auth = () => {
           value={password}
           onChange={onChange}
           required
+          className={"authInput"}
         />
-        <input type="submit" value={newAccount ? "Create Account" : "Log In"} />
-        {error}
+        <input
+          type="submit"
+          value={newAccount ? "Create Account" : "Log In"}
+          className={"authInput authSubmit"}
+        />
+        {error && <span className="authError"> {error} </span>}
       </form>
-      <span onClick={toggleAccount}>
+      <span onClick={toggleAccount} className={"authSwitch"}>
         {newAccount ? "Sign In" : "Create Account"}
       </span>
-      <div>
-        <button onClick={onSocialClick} name="google">
+      <div className={"authBtns"}>
+        <button onClick={onSocialClick} name="google" className={"authBtn"}>
           Continue with Google
+          <FontAwesomeIcon icon={faGoogle} />
         </button>
-        <button onClick={onSocialClick} name="github">
+        <button onClick={onSocialClick} name="github" className={"authBtn"}>
           Continue with Github
+          <FontAwesomeIcon icon={faGithub} />
         </button>
       </div>
     </div>
